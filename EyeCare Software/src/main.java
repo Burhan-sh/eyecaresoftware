@@ -206,7 +206,7 @@ public class main extends JFrame {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
-		tabbedPane.addTab("New tab", null, panel_1, null);
+		tabbedPane.addTab("(+)Add New Information", null, panel_1, null);
 		panel_1.setLayout(new MigLayout("", "[][]25[]25[][][][]", "[]15[]15[]15[]15[]15[]15[]15[]20[]"));
 		
 		JLabel lblNewLabel = new JLabel("Name");
@@ -278,7 +278,7 @@ public class main extends JFrame {
 		
 		
 		JPanel panel_2 = new JPanel();
-		tabbedPane.addTab("New tab", null, panel_2, null);
+		tabbedPane.addTab("Add New Prescription", null, panel_2, null);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(new Color(240, 240, 240));

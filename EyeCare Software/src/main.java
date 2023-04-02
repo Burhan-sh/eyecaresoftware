@@ -1,19 +1,10 @@
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
-
 import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
-import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import java.awt.Insets;
@@ -22,20 +13,10 @@ import java.awt.Component;
 import javax.swing.JTable;
 import java.awt.Dimension;
 import javax.swing.JLabel;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
 import java.awt.GridLayout;
-import java.awt.ComponentOrientation;
-import javax.swing.JLayeredPane;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.SpringLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
@@ -114,21 +95,6 @@ public class main extends JFrame {
 	private JTextField textField_44;
 	private JTable table_1;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					main frame = new main();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -200,7 +166,7 @@ public class main extends JFrame {
 		panel_3.add(textField_21, "cell 1 0");
 		textField_21.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox<String> comboBox = new JComboBox<String>();
 		panel_3.add(comboBox, "cell 2 0");
 		comboBox.addItem("Select By Name");
 		
@@ -275,7 +241,8 @@ public class main extends JFrame {
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Female");
 		panel_1.add(rdbtnNewRadioButton_1, "cell 4 3");
 		
-		
+		buttonGroup.add(rdbtnNewRadioButton);
+		buttonGroup.add(rdbtnNewRadioButton_1);
 		
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Add New Prescription", null, panel_2, null);

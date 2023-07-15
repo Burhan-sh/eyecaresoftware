@@ -17,7 +17,6 @@ public class Launcher {
                 try {
                 	new DataManager();
                 	
-                    @SuppressWarnings("rawtypes")
                     main frame = new main();
                     frame.setVisible(true);
                     frame.setResizable(false);

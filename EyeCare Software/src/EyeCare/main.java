@@ -6,21 +6,12 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import java.awt.Insets;
-import javax.swing.JMenuItem;
+
 import java.awt.Component;
 import javax.swing.JTable;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
-
-import java.awt.Image;
-
-
-import javax.swing.ImageIcon;
-
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -30,27 +21,19 @@ import javax.swing.JButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
-
 import javax.swing.border.EtchedBorder;
 import java.awt.Font;
-import java.awt.Graphics;
-
 import javax.swing.SwingConstants;
 import javax.swing.JTabbedPane;
 import net.miginfocom.swing.MigLayout;
 import com.toedter.calendar.JDateChooser;
-
 import PrescriptionManager.*;
-
-import javax.imageio.ImageIO;
 import javax.swing.Box;
 import java.awt.Panel;
 import java.awt.Label;
 import java.awt.SystemColor;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -116,16 +99,13 @@ public class main extends JFrame {
 	 * Create the frame.
 	 */
 	public main() {
+		
+//		extSetter ext = new extSetter();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(75, 75, 1201, 755);
 		
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-		
-		JMenu mnNewMenu = new JMenu("Home");
-		mnNewMenu.setMargin(new Insets(3, 3, 3, 3));
-		mnNewMenu.setActionCommand("Home");
-		menuBar.add(mnNewMenu);
+		 NavMenu navMenu = new NavMenu();
+	     setJMenuBar(navMenu);
 		
 		GetCustmerData getData = new GetCustmerData();
 		
@@ -137,9 +117,8 @@ public class main extends JFrame {
 		
 		table.getTableHeader();
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("File");
-		mntmNewMenuItem.setAlignmentX(Component.LEFT_ALIGNMENT);
-		mnNewMenu.add(mntmNewMenuItem);
+		
+	
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		

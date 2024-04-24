@@ -40,7 +40,6 @@ import java.util.Map;
 
 import TableConstrain.*;
 
-
 public class main extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -94,13 +93,15 @@ public class main extends JFrame {
 	private JTextField totalAmount;
 	private JTable tablePrescription;
 	public JLabel cusID;
+	public static boolean isDataSelected;
+	public static Object selectedFirstValue;
+
 
 	/**
 	 * Create the frame.
 	 */
 	public main() {
 		
-//		extSetter ext = new extSetter();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(75, 75, 1201, 755);
 		
@@ -115,9 +116,19 @@ public class main extends JFrame {
 		
 		new ExtraFunctions(table , model);
 		
+		table.getSelectionModel().addListSelectionListener(e -> {
+		    // Check if any row is selected
+		    main.isDataSelected = !e.getValueIsAdjusting() && table.getSelectedRow() != -1;
+		    if (main.isDataSelected) {
+		        int selectedRowIndex = table.getSelectedRow();
+		        main.selectedFirstValue = table.getValueAt(selectedRowIndex, 0); // Assuming the first column index is 0
+		    } else {
+		        // If no row is selected, reset the selected first value
+		        main.selectedFirstValue = -1;
+		    }
+		});
+		
 		table.getTableHeader();
-		
-		
 	
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -321,6 +332,7 @@ public class main extends JFrame {
 		GetPrescriptionData preData = new GetPrescriptionData();
 		DefaultTableModel pre_model = preData.getModelData();
 		tablePrescription = new JTable(pre_model);
+
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		panel_6.add(scrollPane_1);
@@ -943,7 +955,7 @@ public class main extends JFrame {
 		
 		// action listener 17-05-2023
 		
-//		PreTableListner newListener = new PreTableListner( pre_model ,insertData , cusID );
+
 		TableListener tableListener = new TableListener(table, customerName, customerAdd, customerContect,
 		        customerAge, ExaminedBy, cusID, cusName, cusNum, genderMale, genderFemale, customerBdate , 
 		        prescriptionCustomerID , pre_model ,insertData , insertLable );
@@ -959,4 +971,5 @@ public class main extends JFrame {
 		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
     }
+	
 }

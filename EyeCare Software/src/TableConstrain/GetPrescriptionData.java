@@ -41,6 +41,20 @@ public class GetPrescriptionData {
         
     	return model;
     }
+    
+    public boolean isPrescriptionDataMatch(String cusID) {
+        String query = "SELECT 1 FROM PrescriptionDetails WHERE CustomerId = ? LIMIT 1";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, cusID);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                return rs.next();  // If there's at least one result, it returns true
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;  // In case of an exception, return false
+        }
+    }
 
 	public DefaultTableModel getModelData() {
     	
@@ -103,6 +117,7 @@ public class GetPrescriptionData {
 		}
 		
     }
+	
 	
 	public void setPrescriptionBadge( String cusID , DefaultTableModel model , Map<String, JTextField> insertData ,Map<String, JLabel> insertJLabel , String reSetField ) {
 		this.getChangeModelData( cusID , model);

@@ -94,7 +94,7 @@ public class main extends JFrame {
 	private JTable tablePrescription;
 	public JLabel cusID;
 	public static boolean isDataSelected;
-	public static Object selectedFirstValue;
+	public static String selectedFirstValue;
 
 
 	/**
@@ -121,10 +121,11 @@ public class main extends JFrame {
 		    main.isDataSelected = !e.getValueIsAdjusting() && table.getSelectedRow() != -1;
 		    if (main.isDataSelected) {
 		        int selectedRowIndex = table.getSelectedRow();
-		        main.selectedFirstValue = table.getValueAt(selectedRowIndex, 0); // Assuming the first column index is 0
+		        // Assuming the ID column index is 0 and it's stored as a String
+		        main.selectedFirstValue = String.valueOf(table.getValueAt(selectedRowIndex, 0));
 		    } else {
 		        // If no row is selected, reset the selected first value
-		        main.selectedFirstValue = -1;
+		        main.selectedFirstValue = null; // or any other appropriate default value
 		    }
 		});
 		

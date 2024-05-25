@@ -3,6 +3,7 @@ package EyeCare;
 import NavigationManager.*;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
+import TableConstrain.*;
 
 class NavBarHandler {
 	PrintPreview printPreview;
@@ -21,9 +22,11 @@ class NavBarHandler {
     	
     	if(main.isDataSelected) {
 //    	    Object firstValue = this.exFunctions.getCustomerJTable();
-    	    System.out.println(main.selectedFirstValue);
 //    	    printPreview.setPrintData(firstValue);
-    	    JOptionPane.showMessageDialog(null, "yes");
+    		System.out.println( main.selectedFirstValue);
+    	    GetPrescriptionData getData = new GetPrescriptionData();
+    	    Boolean test = getData.isPrescriptionDataMatch(main.selectedFirstValue);
+    	    JOptionPane.showMessageDialog(null, test);
     	}else {
     		JOptionPane.showMessageDialog(null, "Please Select Billing Details");
     	}

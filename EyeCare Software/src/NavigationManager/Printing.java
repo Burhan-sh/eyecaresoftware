@@ -4,9 +4,9 @@ import PrintingManager.PrintingBase;
 
 public class Printing {
 	
-	public Printing(Object ids) {
-		PrintingBase printingBase = new PrintingBase(ids);
-		printingBase.directPrint();
+	public Printing(String ids) {
+//		PrintingBase printingBase = new PrintingBase(ids);
+//		printingBase.directPrint();
 	}
 
 }

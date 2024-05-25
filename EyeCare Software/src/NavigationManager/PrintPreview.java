@@ -11,10 +11,7 @@ public class PrintPreview {
 		this.printingBase = new PrintingBase();
 	}
 	
-	public void setPrintData(Object ids) {
-//    	System.out.println("excuted !!!");
-//    	new PrintingBase().setVisible(true);
-//    	PrintingBase printingBase = new PrintingBase(ids);
+	public void setPrintData(String ids) {
 		this.printingBase.setPrintBase(ids);
         printingBase.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
 	}

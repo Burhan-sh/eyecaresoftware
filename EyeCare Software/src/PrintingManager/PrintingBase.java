@@ -28,7 +28,7 @@ public class PrintingBase extends JFrame implements ActionListener {
 
 	private JTextPane mTextPane;
     
-    public void setPrintBase(Object ids) {
+    public void setPrintBase(String ids) {
     	 setTitle("Printer preview demo");
          setSize(600, 600);
          setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,9 +43,8 @@ public class PrintingBase extends JFrame implements ActionListener {
          DesignFormateOne dn = new DesignFormateOne();
          
          GetPrintingData gp = new GetPrintingData();
-         String idss = String.valueOf(ids);
-         String[] customerData = gp.getPresecriptionResult(idss);
-         String fromate = dn.formateTwo(customerData);
+         String[] customerData = gp.getPresecriptionResult(ids);
+         String fromate = dn.formateTwo(customerData , ids);
          
          builder.append(fromate);
 

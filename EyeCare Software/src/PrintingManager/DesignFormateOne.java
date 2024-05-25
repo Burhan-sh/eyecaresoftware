@@ -1,5 +1,7 @@
 package PrintingManager;
 
+import TableConstrain.GetPrescriptionData;
+
 public class DesignFormateOne {
 	
 	public String styleSheet() {
@@ -39,6 +41,9 @@ public class DesignFormateOne {
 	}
 	
 	public String firstSection(String[] CustomerData) {
+//		for (String data : CustomerData) {
+//            System.out.println(data);
+//        }
 		String stringValue = " <tr class='MainBorder'> <td colspan=\"2\"><h3>Recipt Number :</h3><h3>Customer Name :</h3><h3>Address :</h3></td> <td colspan=\"2\"><h3 class=\"font_weight_400\">"+CustomerData[30]+"</h3><h3 class=\"font_weight_400\">"+CustomerData[23]+"</h3><h3 class=\"font_weight_400\">"+CustomerData[24]+"</h3></td> <td></td> <td colspan=\"2\"><h3>Phone No :</h3><h3>Receipt Date</h3><h3>Delivery Date</h3></td> <td colspan=\"2\"><h3 class=\"font_weight_400\">"+CustomerData[25]+"</h3><h3 class=\"font_weight_400\">25-june-2013</h3><h3 class=\"font_weight_400\">25-june-2013</h3></td> <td></td> </tr>";
 		return stringValue;
 	}
@@ -69,7 +74,7 @@ public class DesignFormateOne {
 	}
 	
 	public String sevenSection(String[] CustomerData) {
-		String stringValue = "<tr><td id='Extraborder'>Dr.</td><td id='Extraborder' colspan=\"2\"></td><td id='Extraborder'>SD</td><td id='Extraborder' colspan=\"3\"></td><td id='Extraborder'>PD</td><td colspan=\"2\"></td></tr>";
+		String stringValue = "<tr><td id='Extraborder'>Dr.</td><td id='Extraborder' colspan=\"2\">"+CustomerData[26]+"</td><td id='Extraborder'>SD</td><td id='Extraborder' colspan=\"3\"></td><td id='Extraborder'>PD</td><td colspan=\"2\"></td></tr>";
 		return stringValue;
 	}
 	
@@ -78,13 +83,28 @@ public class DesignFormateOne {
 		return stringValue;
 	}
 	
-	public String repeterBilling(String[] CustomerData) {
-		String BillingRepeter = "<tr class='repeter_billing_border'> <td id='Extraborder'>1</td> <td id='Extraborder'>Cascadio</td> <td id='Extraborder'>500</td> <td id='Extraborder'>300</td> <td id='Extraborder'>200</td> <td id='Extraborder'>100</td> <td id='Extraborder'>700</td> <td>This is once</td> </tr>";
-		String BillingRepeter1 = "<tr class='repeter_billing_border'> <td id='Extraborder'>1</td> <td id='Extraborder'>Cascadio</td> <td id='Extraborder'>500</td> <td id='Extraborder'>300</td> <td id='Extraborder'>200</td> <td id='Extraborder'>100</td> <td id='Extraborder'>700</td> <td>This is once</td> </tr>";
-		String BillingRepeter2 = "<tr class='repeter_billing_border'> <td id='Extraborder'>1</td> <td id='Extraborder'>Cascadio</td> <td id='Extraborder'>500</td> <td id='Extraborder'>300</td> <td id='Extraborder'>200</td> <td id='Extraborder'>100</td> <td id='Extraborder'>700</td> <td>This is once</td> </tr>";
-		BillingRepeter = BillingRepeter + BillingRepeter1 + BillingRepeter2;
-		return BillingRepeter;
+	public String repeterBilling(String CustomerData) {
+		
+		GetPrescriptionData DMI = new GetPrescriptionData();
+		String[][] data = DMI.getPrescriptionById(CustomerData);
+		
+        StringBuilder htmlTable = new StringBuilder();
+  	
+    	for (int i = 0; i < data.length; i++) {
+    		if (data[i] != null) {
+    			htmlTable.append("<tr class='repeter_billing_border'>");
+    			for (int j = 0; j < data[i].length; j++) {
+    				htmlTable.append("<td id='Extraborder'>").append(data[i][j]).append("</td>");
+    			}
+    			htmlTable.append("</tr>");
+    		}
+    	}
+        
+
+        return htmlTable.toString();
 	}
+	
+
 	
 	public String totalRepeterBilling(String[] CustomerData) {
 		String BillingRepeter = "<tr class='repeter_billing_border'> <td id='Extraborder'>GT</td> <td></td> <td></td> <td></td> <td></td> <td id='Extraborder'></td> <td id='Extraborder'>2700</td> <td></td> </tr>";
@@ -96,7 +116,7 @@ public class DesignFormateOne {
 		return stringValue;
 	}
 	
-	public String formateTwo(String[] CustomerData) {
+	public String formateTwo(String[] CustomerData , String customerID) {
 		String htmlStrat = this.htmlStrat();
 		String header = this.headerPart();
 		String footer = this.footerPart();
@@ -111,7 +131,7 @@ public class DesignFormateOne {
 		String nextTableStart = this.nextTableStart();
 		String nextTableEnd = this.nextTableEnd();
 		String eigth = this.eigthSection(CustomerData);
-		String repeterBilling = this.repeterBilling(CustomerData);
+		String repeterBilling = this.repeterBilling(customerID);
 		String totalRepeterBilling = this.totalRepeterBilling(CustomerData);
 		String lastlatters = this.lastlatters();
 		String stringValue = htmlStrat + header + first + footer  + nextTableStart  + second + third + forth + fifth + sixth + nextTableEnd + nextTableStart + seven + nextTableEnd + nextTableStart + eigth + repeterBilling + totalRepeterBilling + nextTableEnd + lastlatters + htmlEnd;

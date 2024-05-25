@@ -18,15 +18,17 @@ class NavBarHandler {
     }
 	
     public void onPrintPreviewtMenuItemClick(ActionEvent e) {
-//    	PrintPreview printPreview = new PrintPreview();
+    	PrintPreview printPreview = new PrintPreview();
     	
     	if(main.isDataSelected) {
-//    	    Object firstValue = this.exFunctions.getCustomerJTable();
-//    	    printPreview.setPrintData(firstValue);
-    		System.out.println( main.selectedFirstValue);
-    	    GetPrescriptionData getData = new GetPrescriptionData();
-    	    Boolean test = getData.isPrescriptionDataMatch(main.selectedFirstValue);
-    	    JOptionPane.showMessageDialog(null, test);
+    		GetPrescriptionData getData = new GetPrescriptionData();
+    		Boolean test = getData.isPrescriptionDataMatch(main.selectedFirstValue);
+    		if(test) {
+    			printPreview.setPrintData(main.selectedFirstValue);
+//    			JOptionPane.showMessageDialog(null, main.selectedFirstValue);
+    		}else {
+    			JOptionPane.showMessageDialog(null, "No invoice is found for this person");
+    		}
     	}else {
     		JOptionPane.showMessageDialog(null, "Please Select Billing Details");
     	}

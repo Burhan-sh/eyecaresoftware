@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Map;
@@ -42,9 +43,59 @@ public class GetPrescriptionData {
     	return model;
     }
     
-    public boolean isPrescriptionDataMatch(String cusID) {
-        String query = "SELECT 1 FROM PrescriptionDetails WHERE CustomerId = ? LIMIT 1";
+    public int getPrecDataCount(String cusID) {
+    	String totquery = "SELECT count(*) FROM PrescritionDetails WHERE CustomerId = "+cusID;
+    	int count = 0;
+    	try {
+    		 Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(totquery);
+	         count = rs.getInt(1);	
+    	} catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(e);  // In case of an exception, return false
+        }
+    	return count;
+    }
+    
+    public String[][] getPrescriptionById(String cusID) {
+    	String query = "SELECT PrescriptionID, FrameType, LensType, FramePrice, PaidAmount, ExtraCharges, TotalAmount, Remark FROM PrescritionDetails WHERE CustomerId = "+cusID;
 
+    	String[][] data = null;
+    	try {
+    		
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int numColumns = rsmd.getColumnCount();
+        
+            int numRows = this.getPrecDataCount(cusID);
+          
+       
+            // Create a DataStorage instance with enough columns
+            DataModifierForInvoice storage = new DataModifierForInvoice(numRows, numColumns);
+            
+            // Populate the data from the result set
+            int row = 0;
+            while (rs.next()) {
+                String[] rowData = new String[numColumns];
+                for (int i = 0; i < numColumns; i++) {
+                    rowData[i] = rs.getString(i + 1); // Column indices start from 1
+                }
+                storage.setData(row++, rowData);
+            }
+            data = storage.getData();
+         	
+    	} catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(e);  // In case of an exception, return false
+        }
+
+		return data;
+    }
+    
+    public boolean isPrescriptionDataMatch(String cusID) {
+        String query = "SELECT 1 FROM PrescritionDetails WHERE CustomerId = ? LIMIT 1";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, cusID);
             try (ResultSet rs = pstmt.executeQuery()) {

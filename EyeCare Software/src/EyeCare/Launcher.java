@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import TableConstrain.*;
 
 public class Launcher {
+	public static main frame;
     public static void main(String[] args) {
         SingleInstanceChecker instanceChecker = new SingleInstanceChecker();
 //        if (instanceChecker.isAppAlreadyRunning()) {
@@ -17,7 +18,7 @@ public class Launcher {
                 try {
                 	new DataManager();
                 	
-                    main frame = new main();
+                    frame = new main();
                     frame.setVisible(true);
                     frame.setResizable(false);
                     frame.setExtendedState(JFrame.MAXIMIZED_BOTH);

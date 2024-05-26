@@ -69,6 +69,7 @@ class NavBarHandler {
 
         if (response == JOptionPane.YES_OPTION) {
         	System.out.println("This is closed");
+        	Launcher.frame.dispose();
         }
     }  
 

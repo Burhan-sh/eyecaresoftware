@@ -106,17 +106,14 @@ public class PrintingBase extends JFrame implements ActionListener {
 		    dialog.setVisible(true);
 	}
 	
-	public void directPrint() {
-		HashPrintRequestAttributeSet set = new HashPrintRequestAttributeSet();
-		set.add(MediaSizeName.ISO_A4);
-		set.add(OrientationRequested.PORTRAIT);
-		
-		PageFormat pf = PrinterJob.getPrinterJob().getPageFormat(set);
-
-		final PrintPreview preview = new PrintPreview(mTextPane.getPrintable(null, null), pf);
-		preview.print();
-	}
-	
-	
-	
+//	public void directPrint() {
+//		HashPrintRequestAttributeSet set = new HashPrintRequestAttributeSet();
+//		set.add(MediaSizeName.ISO_A4);
+//		set.add(OrientationRequested.PORTRAIT);
+//		
+//		PageFormat pf = PrinterJob.getPrinterJob().getPageFormat(set);
+//
+//		final PrintPreview preview = new PrintPreview(mTextPane.getPrintable(null, null), pf);
+//		preview.print();
+//	}
 }

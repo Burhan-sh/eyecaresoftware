@@ -34,11 +34,6 @@ class NavBarHandler {
     	}
     }
     
-    public void onPrintMenuItemClick(ActionEvent e) {
-//    	Object firstValue = main.selectedFirstValue;
-//    	new Printing(firstValue);
-    }
-    
 	public void onImportMenuItemClick(ActionEvent e) {
 		ImportProcess importProcess = new ImportProcess();
 		importProcess.importBackup();
@@ -61,7 +56,21 @@ class NavBarHandler {
 
     public void onDetailsMenuItemClick(ActionEvent e) {
         JOptionPane.showMessageDialog(null, "Software Details Clicked");
-    }    
+    } 
+    
+    public void onClosedBtnClicked(ActionEvent e) {
+        int response = JOptionPane.showConfirmDialog(
+                null,
+                "Are you sure you want to exit?",
+                "Confirm Exit",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+        );
+
+        if (response == JOptionPane.YES_OPTION) {
+        	System.out.println("This is closed");
+        }
+    }  
 
 
 }

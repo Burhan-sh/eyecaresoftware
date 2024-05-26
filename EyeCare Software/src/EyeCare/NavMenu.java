@@ -30,17 +30,13 @@ public class NavMenu extends JMenuBar {
 
         homeMenu.add(new JPopupMenu.Separator()); // Add horizontal line after the third menu item
 
-        JMenuItem printPreviewMenuItem = new JMenuItem("Print Preview");
-        homeMenu.add(createMenuItem(printPreviewMenuItem, "preview.png", "     Ctrl + P", navBarHandler::onPrintPreviewtMenuItemClick));
-
-        JMenuItem printMenuItem = new JMenuItem("Print");
-        homeMenu.add(createMenuItem(printMenuItem, "print.png", "                   Ctrl + Shift + P", navBarHandler::onPrintMenuItemClick));
+        JMenuItem printPreviewMenuItem = new JMenuItem("Print Invoice");
+        homeMenu.add(createMenuItem(printPreviewMenuItem, "preview.png", "      Ctrl + P", navBarHandler::onPrintPreviewtMenuItemClick));
 
         homeMenu.add(new JPopupMenu.Separator()); // Add horizontal line after the fifth menu item
 
         JMenuItem closedMenuItem = new JMenuItem("Closed");
-        configureMenuItem(closedMenuItem, "closed.png", 16, 16, "                Ctrl + W");
-        homeMenu.add(closedMenuItem);
+        homeMenu.add(createMenuItem(closedMenuItem, "closed.png", "               Ctrl + W", navBarHandler::onClosedBtnClicked));
         
         /* Home Menu end */ 
         

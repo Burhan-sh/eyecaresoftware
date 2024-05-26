@@ -53,25 +53,16 @@ public class DesignFormateOne {
 	}
 	
 	public String thirdSection(String CustomerData) {
-		GetPrescriptionData DMI = new GetPrescriptionData();
-		String[][] data = DMI.getOtherEyeData(CustomerData);
-		
-	  	for (int i = 0; i < data.length; i++) {
-    		if (data[i] != null) {
-    			for (int j = 0; j < data[i].length; j++) {
-    				System.out.println("data["+i+"]["+j+"] : "+ data[i][j]);
-//    					htmlTable.append("<td id='Extraborder'>").append(data[i][j]).append("</td>");
-    				
-    			}
-    		}
-    	}
         
 		String stringValue = "<tr><td id='Extraborder'></td><td id='Extraborder'>SPH</td><td id='Extraborder'>CYL</td><td id='Extraborder'>AXIX</td><td id='Extraborder'>VN</td><td id='Extraborder'></td><td id='Extraborder'>SPH</td><td id='Extraborder'>CYL</td><td id='Extraborder'>AXIX</td><td>VN</td><td class='balance_paragraph'></td></tr>";
 		return stringValue;
 	}
 	
-	public String forthSection(String[] CustomerData) {
-		String stringValue = "<tr class='widthFull'><td id='Extraborder'>DV</td><td id='Extraborder'></td><td id='Extraborder'></td><td id='Extraborder'></td><td id='Extraborder'></td><td id='Extraborder'>DV</td><td id='Extraborder'></td><td id='Extraborder'></td><td id='Extraborder'></td><td></td><td class='balance_paragraph'></td></tr>";
+	public String forthSection(String CustomerData) {
+		GetPrescriptionData DMI = new GetPrescriptionData();
+		String[][] data = DMI.getOtherEyeData(CustomerData);
+		
+		String stringValue = "<tr class='widthFull'><td id='Extraborder'>OS</td><td id='Extraborder'>"+data[0][1]+"</td><td id='Extraborder'>"+data[0][2]+"</td><td id='Extraborder'>"+data[0][3]+"</td><td id='Extraborder'>"+data[0][6]+"</td><td id='Extraborder'>OS</td><td id='Extraborder'>"+data[0][7]+"</td><td id='Extraborder'>"+data[0][8]+"</td><td id='Extraborder'>"+data[0][9]+"</td><td>"+data[0][12]+"</td><td class='balance_paragraph'></td></tr>";
 		return stringValue;
 	}
 	
@@ -81,7 +72,7 @@ public class DesignFormateOne {
 	}
 	
 	public String sixthSection(String[] CustomerData) {
-		String stringValue = " <tr> <td></td> <td>ADD</td> <td colspan=\"3\" class='textAlign_Center'>+2.00</td> <td></td> <td>ADD</td> <td colspan=\"3\" class='textAlign_Center'>+2.00</td> </tr><tr><td></td></tr>";
+		String stringValue = " <tr> <td></td> <td>ADD</td> <td colspan=\"3\" class='textAlign_Center'>+0.00</td> <td></td> <td>ADD</td> <td colspan=\"3\" class='textAlign_Center'>+0.00</td> </tr><tr><td></td></tr>";
 		return stringValue;
 	}
 	
@@ -159,7 +150,7 @@ public class DesignFormateOne {
 		String first = this.firstSection(CustomerData);
 		String second = this.secondSection(CustomerData);
 		String third = this.thirdSection(customerID);
-		String forth = this.forthSection(CustomerData);
+		String forth = this.forthSection(customerID);
 		String fifth = this.fifthSection(CustomerData);
 		String sixth = this.sixthSection(CustomerData);
 		String seven = this.sevenSection(CustomerData);

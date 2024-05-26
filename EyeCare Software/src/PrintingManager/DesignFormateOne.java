@@ -1,6 +1,7 @@
 package PrintingManager;
 
 import TableConstrain.GetPrescriptionData;
+import java.time.LocalDate;
 
 public class DesignFormateOne {
 	
@@ -41,10 +42,8 @@ public class DesignFormateOne {
 	}
 	
 	public String firstSection(String[] CustomerData) {
-//		for (String data : CustomerData) {
-//            System.out.println(data);
-//        }
-		String stringValue = " <tr class='MainBorder'> <td colspan=\"2\"><h3>Recipt Number :</h3><h3>Customer Name :</h3><h3>Address :</h3></td> <td colspan=\"2\"><h3 class=\"font_weight_400\">"+CustomerData[30]+"</h3><h3 class=\"font_weight_400\">"+CustomerData[23]+"</h3><h3 class=\"font_weight_400\">"+CustomerData[24]+"</h3></td> <td></td> <td colspan=\"2\"><h3>Phone No :</h3><h3>Receipt Date</h3><h3>Delivery Date</h3></td> <td colspan=\"2\"><h3 class=\"font_weight_400\">"+CustomerData[25]+"</h3><h3 class=\"font_weight_400\">25-june-2013</h3><h3 class=\"font_weight_400\">25-june-2013</h3></td> <td></td> </tr>";
+		LocalDate currentDate = LocalDate.now();
+		String stringValue = " <tr class='MainBorder'> <td colspan=\"2\"><h3>Recipt Number :</h3><h3>Customer Name :</h3><h3>Address :</h3></td> <td colspan=\"2\"><h3 class=\"font_weight_400\">"+CustomerData[30]+"</h3><h3 class=\"font_weight_400\">"+CustomerData[23]+"</h3><h3 class=\"font_weight_400\">"+CustomerData[24]+"</h3></td> <td></td> <td colspan=\"2\"><h3>Phone No :</h3><h3>Invoice Date</h3><h3></h3></td> <td colspan=\"2\"><h3 class=\"font_weight_400\">"+CustomerData[25]+"</h3><h3 class=\"font_weight_400\">" + currentDate + "</h3><h3 class=\"font_weight_400\"></h3></td> <td></td> </tr>";
 		return stringValue;
 	}
 	
@@ -53,7 +52,20 @@ public class DesignFormateOne {
 		return stringValue;
 	}
 	
-	public String thirdSection(String[] CustomerData) {
+	public String thirdSection(String CustomerData) {
+		GetPrescriptionData DMI = new GetPrescriptionData();
+		String[][] data = DMI.getOtherEyeData(CustomerData);
+		
+	  	for (int i = 0; i < data.length; i++) {
+    		if (data[i] != null) {
+    			for (int j = 0; j < data[i].length; j++) {
+    				System.out.println("data["+i+"]["+j+"] : "+ data[i][j]);
+//    					htmlTable.append("<td id='Extraborder'>").append(data[i][j]).append("</td>");
+    				
+    			}
+    		}
+    	}
+        
 		String stringValue = "<tr><td id='Extraborder'></td><td id='Extraborder'>SPH</td><td id='Extraborder'>CYL</td><td id='Extraborder'>AXIX</td><td id='Extraborder'>VN</td><td id='Extraborder'></td><td id='Extraborder'>SPH</td><td id='Extraborder'>CYL</td><td id='Extraborder'>AXIX</td><td>VN</td><td class='balance_paragraph'></td></tr>";
 		return stringValue;
 	}
@@ -94,7 +106,11 @@ public class DesignFormateOne {
     		if (data[i] != null) {
     			htmlTable.append("<tr class='repeter_billing_border'>");
     			for (int j = 0; j < data[i].length; j++) {
-    				htmlTable.append("<td id='Extraborder'>").append(data[i][j]).append("</td>");
+    				if(j == data[i].length - 1 ) {
+    					htmlTable.append("<td>").append(data[i][j]).append("</td>");
+    				}else {	
+    					htmlTable.append("<td id='Extraborder'>").append(data[i][j]).append("</td>");
+    				}
     			}
     			htmlTable.append("</tr>");
     		}
@@ -106,8 +122,28 @@ public class DesignFormateOne {
 	
 
 	
-	public String totalRepeterBilling(String[] CustomerData) {
-		String BillingRepeter = "<tr class='repeter_billing_border'> <td id='Extraborder'>GT</td> <td></td> <td></td> <td></td> <td></td> <td id='Extraborder'></td> <td id='Extraborder'>2700</td> <td></td> </tr>";
+	public String totalRepeterBilling(String CustomerData) {
+		
+		GetPrescriptionData DMI = new GetPrescriptionData();
+		String[][] data = DMI.getPrescriptionById(CustomerData);
+		
+		int totalvalue = 0;
+		
+	  	for (int i = 0; i < data.length; i++) {
+    		if (data[i] != null) {
+    			for (int j = 0; j < data[i].length; j++) {
+			       if (j == 6) {
+		                try {
+		                	totalvalue += Integer.parseInt(data[i][j]);
+		                } catch (NumberFormatException e) {
+		                    System.err.println("Invalid number format in data[" + i + "][" + j + "]: " + data[i][j]);
+		                }
+		            }
+    			}
+    		}
+    	}
+	  	
+		String BillingRepeter = "<tr class='repeter_billing_border'> <td id='Extraborder'>GT</td> <td></td> <td></td> <td></td> <td></td> <td id='Extraborder'></td> <td id='Extraborder'>" + totalvalue + "</td> <td></td> </tr>";
 		return BillingRepeter;
 	}
 	
@@ -122,7 +158,7 @@ public class DesignFormateOne {
 		String footer = this.footerPart();
 		String first = this.firstSection(CustomerData);
 		String second = this.secondSection(CustomerData);
-		String third = this.thirdSection(CustomerData);
+		String third = this.thirdSection(customerID);
 		String forth = this.forthSection(CustomerData);
 		String fifth = this.fifthSection(CustomerData);
 		String sixth = this.sixthSection(CustomerData);
@@ -132,7 +168,7 @@ public class DesignFormateOne {
 		String nextTableEnd = this.nextTableEnd();
 		String eigth = this.eigthSection(CustomerData);
 		String repeterBilling = this.repeterBilling(customerID);
-		String totalRepeterBilling = this.totalRepeterBilling(CustomerData);
+		String totalRepeterBilling = this.totalRepeterBilling(customerID);
 		String lastlatters = this.lastlatters();
 		String stringValue = htmlStrat + header + first + footer  + nextTableStart  + second + third + forth + fifth + sixth + nextTableEnd + nextTableStart + seven + nextTableEnd + nextTableStart + eigth + repeterBilling + totalRepeterBilling + nextTableEnd + lastlatters + htmlEnd;
 		return stringValue;

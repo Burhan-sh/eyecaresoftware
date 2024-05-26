@@ -3,6 +3,9 @@
 
 *.class
 
+EyeCare.db
+git_rsa
+.project
 
 # Log file
 

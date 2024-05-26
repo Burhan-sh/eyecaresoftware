@@ -25,7 +25,6 @@ public class ExtraFunctions {
 	
 	public ExtraFunctions( JTable table , DefaultTableModel model  ) {
 		this.table = table;
-		System.out.println(table);
 		hideColumn("ID");
 	}
 	

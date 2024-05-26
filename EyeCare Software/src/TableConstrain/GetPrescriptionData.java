@@ -57,6 +57,40 @@ public class GetPrescriptionData {
     	return count;
     }
     
+    public String[][] getOtherEyeData(String cusID){
+    	String query = "SELECT PrescriptionID, sphOD, cylOD, axisOD, vdOD, nearOD, vnOD, sphOS, cylOS, axisOS, vdOS, nearOS, vnOS FROM PrescritionDetails WHERE CustomerId = '" + cusID + "' ORDER BY PrescriptionID DESC LIMIT 1";
+    	String[][] data = null;
+    	try {
+    		
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int numColumns = rsmd.getColumnCount();
+           
+       
+            // Create a DataStorage instance with enough columns
+            DataModifierForInvoice storage = new DataModifierForInvoice(1, numColumns);
+            
+            // Populate the data from the result set
+            int row = 0;
+            while (rs.next()) {
+                String[] rowData = new String[numColumns];
+                for (int i = 0; i < numColumns; i++) {
+                    rowData[i] = rs.getString(i + 1); // Column indices start from 1
+                }
+                storage.setData(row++, rowData);
+            }
+            data = storage.getData();
+         	
+    	} catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(e);  // In case of an exception, return false
+        }
+
+		return data;
+    }
+    
     public String[][] getPrescriptionById(String cusID) {
     	String query = "SELECT PrescriptionID, FrameType, LensType, FramePrice, PaidAmount, ExtraCharges, TotalAmount, Remark FROM PrescritionDetails WHERE CustomerId = "+cusID;
 

@@ -17,12 +17,9 @@ import javax.swing.table.DefaultTableModel;
 public class updatePrescriptionHandler implements ActionListener  {
 	private Map<String, JTextField> insertData;
 	private Map<String, JLabel> insertLable;
-	private DefaultTableModel model;
-
 	public updatePrescriptionHandler( Map<String, JTextField> insertData, Map<String, JLabel> insertLable, DefaultTableModel pre_model ) {
 		this.insertData = insertData;
 		this.insertLable = insertLable;
-		this.model = pre_model;
 	}
 
 	@Override
@@ -51,8 +48,6 @@ public class updatePrescriptionHandler implements ActionListener  {
 		String jTotalAmount = insertData.get("TotalAmount").getText();
 		int jCustomerId = Integer.parseInt(insertData.get("CustomerId").getText());
 		String jPrescriptionID = insertData.get("txtPrescriptionID").getText();
-		
-		System.out.println( jPrescriptionID );
 		
         Connection conn = null;
         PreparedStatement pstmt = null;

@@ -36,7 +36,7 @@ public class NavMenu extends JMenuBar {
         homeMenu.add(new JPopupMenu.Separator()); // Add horizontal line after the fifth menu item
 
         JMenuItem closedMenuItem = new JMenuItem("Closed");
-        homeMenu.add(createMenuItem(closedMenuItem, "closed.png", "               Ctrl + W", navBarHandler::onClosedBtnClicked));
+        homeMenu.add(createMenuItem(closedMenuItem, "closed.png", "               Ctrl + Q", navBarHandler::onClosedBtnClicked));
         
         /* Home Menu end */ 
         
@@ -44,20 +44,18 @@ public class NavMenu extends JMenuBar {
         JMenu adminstrative = new JMenu("Adminstrative Options");
         configureMenu(adminstrative, "admin-options.png", 20, 20);
         add(adminstrative);
+        
 
         JMenuItem changePassMenuItem = new JMenuItem("Change Password");
-        configureMenuItem(changePassMenuItem, "reset-password.png", 16, 16, "           Ctrl + L");
-        adminstrative.add(changePassMenuItem);
+        adminstrative.add(createMenuItem(changePassMenuItem, "reset-password.png", "           Ctrl + K", navBarHandler::onChangePassMenuItemClick));
 
         adminstrative.add(new JPopupMenu.Separator()); // Add horizontal line after the first menu item
 
         JMenuItem userAccessMenuItem = new JMenuItem("User's Accessbity");
-        configureMenuItem(userAccessMenuItem, "user.png", 16, 16, "             Ctrl + I");
-        adminstrative.add(userAccessMenuItem);
+        adminstrative.add(createMenuItem(userAccessMenuItem, "user.png", "             Ctrl + U", navBarHandler::onUserAccessMenuItemClick));
 
         JMenuItem guestUserMenuItem = new JMenuItem("Guest User's Accessbity");
-        configureMenuItem(guestUserMenuItem, "guest.png", 16, 16, "   Ctrl + E");
-        adminstrative.add(guestUserMenuItem);
+        adminstrative.add(createMenuItem(guestUserMenuItem, "guest.png", "   Ctrl + G", navBarHandler::onGuestAccessMenuItemClick));
         
         /* Admin Menu end */ 
         
@@ -67,18 +65,15 @@ public class NavMenu extends JMenuBar {
         add(settings);
 
         JMenuItem utilityMenuItem = new JMenuItem("Change Utility Settings");
-        configureMenuItem(utilityMenuItem, "utility.png", 16, 16, "        Ctrl + L");
-        settings.add(utilityMenuItem);
+        settings.add(createMenuItem(utilityMenuItem, "utility.png", "        Shift + U", navBarHandler::onUtilityMenuItem));
 
         settings.add(new JPopupMenu.Separator()); // Add horizontal line after the first menu item
 
         JMenuItem allCustomerMenuItem = new JMenuItem("List Of All Customers");
-        configureMenuItem(allCustomerMenuItem, "user-list.png", 16, 16, "           Ctrl + I");
-        settings.add(allCustomerMenuItem);
+        settings.add(createMenuItem(allCustomerMenuItem, "user-list.png", "           Shift + L", navBarHandler::onCustomerListMenuItem));
 
         JMenuItem prescriptionMenuItem = new JMenuItem("List Of All Prescription");
-        configureMenuItem(prescriptionMenuItem, "prescription.png", 16, 16, "        Ctrl + E");
-        settings.add(prescriptionMenuItem);
+        settings.add(createMenuItem(prescriptionMenuItem, "prescription.png", "        Shift + P", navBarHandler::onPrescriptionListMenuItem));
         
         /* Setting Menu end */ 
         
@@ -88,12 +83,9 @@ public class NavMenu extends JMenuBar {
         add(help);
 
         JMenuItem detailsMenuItem = new JMenuItem("Software Details");
-        configureMenuItem(detailsMenuItem, "details-about.png", 16, 16, "        Ctrl + L");
-        help.add(detailsMenuItem);
+        help.add(createMenuItem(detailsMenuItem, "details-about.png", "        Ctrl + H", navBarHandler::onHelpMenuItem));
         
         /* Help Menu end */ 
-        
-        
     }
     
     private JMenuItem createMenuItem(JMenuItem menuItem, String iconFileName, String shortcut, ActionListener actionListener) {

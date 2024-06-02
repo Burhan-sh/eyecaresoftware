@@ -41,10 +41,14 @@ public class DataManager {
                 stmt.execute("CREATE TABLE CustomerInfo (id INTEGER PRIMARY KEY,Name TEXT,ExaminedBy TEXT,Address TEXT,BirthDate TEXT,ContectNo TEXT,Gender TEXT,Age INTEGER)");
             }
             
-            // Create table 2 if it doesn't exist
             if (!tableExists(conn, "PrescritionDetails")) {
                 stmt.execute("CREATE TABLE PrescritionDetails (PrescriptionID INTEGER PRIMARY KEY,sphOD TEXT,cylOD TEXT,axisOD TEXT,vdOD TEXT,nearOD TEXT,vnOD TEXT,sphOS TEXT,cylOS TEXT,axisOS TEXT,vdOS TEXT,nearOS TEXT,vnOS TEXT,LensType TEXT,LensFor TEXT,LensSide TEXT,LensPrice TEXT,FrameType TEXT,FramePrice TEXT,PaidAmount TEXT,ExtraCharges TEXT,Remark TEXT,TotalAmount TEXT,CustomerId INTEGER,OrderDate TEXT)");
             }
+            
+//            if (!tableExists(conn, "userInfo")) {
+//                stmt.execute("CREATE TABLE userInfo (user_id INTEGER PRIMARY KEY,username TEXT NOT NULL,password TEXT NOT NULL,user_role TEXT NOT NULL,mobile TEXT,email TEXT)");
+//            }
+            
         } finally {
             if (conn != null) {
                 conn.close();

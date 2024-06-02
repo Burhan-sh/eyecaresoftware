@@ -9,6 +9,8 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+
+import LoginManager.LoginChunk;
 import TableConstrain.*;
 
 class NavBarHandler {
@@ -152,7 +154,7 @@ class NavBarHandler {
         );
 
         if (response == JOptionPane.YES_OPTION) {
-        	Launcher.frame.dispose();
+        	LoginChunk.frame.dispose();
         }
     } 
 }

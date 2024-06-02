@@ -1,40 +1,17 @@
 package EyeCare;
-
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import TableConstrain.*;
+import LoginManager.LoginChunk;
+import LoginManager.LoginPannel;
+import LoginManager.LoginSessions;
 
 public class Launcher {
-	public static main frame;
     public static void main(String[] args) {
-        SingleInstanceChecker instanceChecker = new SingleInstanceChecker();
-//        if (instanceChecker.isAppAlreadyRunning()) {
-//            instanceChecker.showAppAlreadyRunningError();
-//            System.exit(0);
+    	 LoginPannel loginPanel = new LoginPannel();
+         loginPanel.setVisible(true);
+//        if(LoginSessions.getUserId() != null) {
+//        	new LoginChunk();
+//        }else {
+////        	new LoginPannel();
+//        	System.out.println("hello");
 //        }
-
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                	new DataManager();
-                	
-                    frame = new main();
-                    frame.setVisible(true);
-                    frame.setResizable(false);
-                    frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    
-                    Runtime.getRuntime().addShutdownHook(new Thread() {
-                        public void run() {
-                            instanceChecker.removeLockFile();
-                        }
-                    });
-                    
-                    
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 }

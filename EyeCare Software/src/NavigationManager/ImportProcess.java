@@ -85,7 +85,12 @@ public class ImportProcess {
 	   try {
 	        existingDbDeleted();
 	        File selectedFile = getPrivateImport();
-	        System.out.println(selectedFile);
+	        if (selectedFile == null || !selectedFile.exists()) {
+	            JOptionPane.showMessageDialog(null, "No file selected or file does not exist.", "Import Error", JOptionPane.ERROR_MESSAGE);
+	            System.out.println(selectedFile);
+	            return;
+	        }
+	        
 	        FileInputStream input = new FileInputStream(selectedFile);
 	        FileOutputStream output = new FileOutputStream("EyeCare.db");
 	

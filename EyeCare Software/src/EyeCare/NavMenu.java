@@ -37,14 +37,12 @@ public class NavMenu extends JMenuBar {
 
         JMenuItem closedMenuItem = new JMenuItem("Closed");
         homeMenu.add(createMenuItem(closedMenuItem, "closed.png", "               Ctrl + Q", navBarHandler::onClosedBtnClicked));
-        
         /* Home Menu end */ 
         
     	/* Admin Menu Start */
         JMenu adminstrative = new JMenu("Adminstrative Options");
         configureMenu(adminstrative, "admin-options.png", 20, 20);
         add(adminstrative);
-        
 
         JMenuItem changePassMenuItem = new JMenuItem("Change Password");
         adminstrative.add(createMenuItem(changePassMenuItem, "reset-password.png", "           Ctrl + K", navBarHandler::onChangePassMenuItemClick));

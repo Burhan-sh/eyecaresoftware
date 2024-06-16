@@ -146,11 +146,11 @@ class NavBarHandler {
     
     public void onClosedBtnClicked(ActionEvent e) {
         int response = JOptionPane.showConfirmDialog(
-                null,
-                "Are you sure you want to exit?",
-                "Confirm Exit",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE
+            null,
+            "Are you sure you want to exit?",
+            "Confirm Exit",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE
         );
 
         if (response == JOptionPane.YES_OPTION) {

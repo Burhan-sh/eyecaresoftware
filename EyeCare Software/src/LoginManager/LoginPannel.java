@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.JTextField;
@@ -11,13 +13,14 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class LoginPannel extends JFrame {
     public JTextField textField;
-    public JTextField textField_1;
+    public JPasswordField textField_1;
 
     public LoginPannel() {
         setTitle("Login Screen");
@@ -66,7 +69,7 @@ public class LoginPannel extends JFrame {
         panel_2.add(textField);
         textField.setColumns(10);
         
-        textField_1 = new JTextField();
+        textField_1 = new JPasswordField(20);;
         textField_1.setColumns(10);
         textField_1.setBounds(92, 99, 193, 27);
         panel_2.add(textField_1);
@@ -78,7 +81,13 @@ public class LoginPannel extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Handle login action
-                System.out.println("Login button clicked");
+                String username = textField.getText();
+                String password = new String(textField_1.getPassword());
+                if (username == null || username.trim().isEmpty() || password == null || password.trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Username or password cannot be blank.");
+                }else {
+                	new LoginAuthintication(username,password);
+                }
             }
         });
         loginButton.setBounds(92, 137, 89, 23);
@@ -86,12 +95,11 @@ public class LoginPannel extends JFrame {
         
         JButton loginRevertButton = new JButton("Cancel");
         loginRevertButton.setFont(new Font("Arial", Font.BOLD, 12));
-        loginRevertButton.setForeground(new Color(0, 0, 64));
+        loginRevertButton.setForeground(new Color(255, 255, 255));
         loginRevertButton.setBackground(Color.BLUE);
         loginRevertButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Handle cancel action
-                System.out.println("Cancel button clicked");
+                dispose();
             }
         });
         loginRevertButton.setBounds(191, 137, 89, 23);

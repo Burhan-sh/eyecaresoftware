@@ -9,16 +9,16 @@ import TableConstrain.DataManager;
 public class LoginChunk {
 	public static main frame;
 	public LoginChunk() {
-		SingleInstanceChecker instanceChecker = new SingleInstanceChecker();
-		if (instanceChecker.isAppAlreadyRunning()) {
-			instanceChecker.showAppAlreadyRunningError();
-			System.exit(0);
-		}
+//		SingleInstanceChecker instanceChecker = new SingleInstanceChecker();
+//		if (instanceChecker.isAppAlreadyRunning()) {
+//			instanceChecker.showAppAlreadyRunningError();
+//			System.exit(0);
+//		}
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new DataManager();
+//					new DataManager();
 					
 					frame = new main();
 					frame.setVisible(true);
@@ -26,11 +26,11 @@ public class LoginChunk {
 					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					
-					Runtime.getRuntime().addShutdownHook(new Thread() {
-						public void run() {
-							instanceChecker.removeLockFile();
-						}
-					});
+//					Runtime.getRuntime().addShutdownHook(new Thread() {
+//						public void run() {
+//							instanceChecker.removeLockFile();
+//						}
+//					});
 					
 				} catch (Exception e) {
 					e.printStackTrace();

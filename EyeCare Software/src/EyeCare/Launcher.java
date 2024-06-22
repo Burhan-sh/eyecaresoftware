@@ -1,17 +1,15 @@
 package EyeCare;
-import LoginManager.LoginChunk;
+import java.sql.SQLException;
+
 import LoginManager.LoginPannel;
-import LoginManager.LoginSessions;
+import TableConstrain.DataManager;
+
 
 public class Launcher {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+//    	new LoginChunk();
     	 LoginPannel loginPanel = new LoginPannel();
          loginPanel.setVisible(true);
-//        if(LoginSessions.getUserId() != null) {
-//        	new LoginChunk();
-//        }else {
-////        	new LoginPannel();
-//        	System.out.println("hello");
-//        }
+         new DataManager();
     }
 }

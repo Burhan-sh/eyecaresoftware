@@ -86,7 +86,12 @@ public class LoginPannel extends JFrame {
                 if (username == null || username.trim().isEmpty() || password == null || password.trim().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Username or password cannot be blank.");
                 }else {
-                	new LoginAuthintication(username,password);
+                	LoginAuthintication auth = new LoginAuthintication();
+                	Boolean valid = auth.verifications(username,password);
+                	if(valid) {
+                		dispose();
+                		new LoginChunk();
+                	}
                 }
             }
         });

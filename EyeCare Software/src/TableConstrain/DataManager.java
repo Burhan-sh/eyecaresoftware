@@ -2,6 +2,7 @@ package TableConstrain;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -45,9 +46,41 @@ public class DataManager {
                 stmt.execute("CREATE TABLE PrescritionDetails (PrescriptionID INTEGER PRIMARY KEY,sphOD TEXT,cylOD TEXT,axisOD TEXT,vdOD TEXT,nearOD TEXT,vnOD TEXT,sphOS TEXT,cylOS TEXT,axisOS TEXT,vdOS TEXT,nearOS TEXT,vnOS TEXT,LensType TEXT,LensFor TEXT,LensSide TEXT,LensPrice TEXT,FrameType TEXT,FramePrice TEXT,PaidAmount TEXT,ExtraCharges TEXT,Remark TEXT,TotalAmount TEXT,CustomerId INTEGER,OrderDate TEXT)");
             }
             
-//            if (!tableExists(conn, "userInfo")) {
-//                stmt.execute("CREATE TABLE userInfo (user_id INTEGER PRIMARY KEY,username TEXT NOT NULL,password TEXT NOT NULL,user_role TEXT NOT NULL,mobile TEXT,email TEXT)");
-//            }
+            if (!tableExists(conn, "userInfo")) {
+                try (Statement stmt1 = conn.createStatement()) {
+                    String createTableSQL = "CREATE TABLE userInfo (" +
+                            "user_id INTEGER PRIMARY KEY, " +
+                            "username TEXT NOT NULL, " +
+                            "password TEXT NOT NULL, " +
+                            "user_role TEXT NOT NULL, " +
+                            "mobile TEXT, " +
+                            "email TEXT, " +
+                            "is_active INTEGER)";
+                    stmt1.execute(createTableSQL);
+                    
+                    String insertDefaultUserSQL = "INSERT INTO userInfo (user_id, username, password, user_role, mobile, email, is_active) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    try (PreparedStatement pstmt = conn.prepareStatement(insertDefaultUserSQL)) {
+                        pstmt.setInt(1, 1);
+                        pstmt.setString(2, "master_admin");
+                        pstmt.setString(3, "hxoc7LfZ0C5MNnPZc62UWQ==");
+                        pstmt.setString(4, "super_admin");
+                        pstmt.setString(5, null);
+                        pstmt.setString(6, null);
+                        pstmt.setInt(7, 1);
+                        pstmt.executeUpdate();
+                        
+                        // Insert second user
+                        pstmt.setInt(1, 2);
+                        pstmt.setString(2, "admin");
+                        pstmt.setString(3, "NUKUms5zgbOo4lX1wqZ9eQ==");
+                        pstmt.setString(4, "admin");
+                        pstmt.setString(5, null);
+                        pstmt.setString(6, null);
+                        pstmt.setInt(7, 1);
+                        pstmt.executeUpdate();
+                    }
+                }
+            }
             
         } finally {
             if (conn != null) {

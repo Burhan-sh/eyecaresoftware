@@ -1,26 +1,39 @@
 package LoginManager;
 
+import java.awt.Image;
 import java.util.HashMap;
-import java.util.Map;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import TableConstrain.getUserInformation;
 
 public class LoginAuthintication {
     private static final String DEFAULT_USERNAME = "master_admin";
     private static final String DEFAULT_PASSWORD = "super@eyecare";
-    private Map<String, String> userTable = new HashMap<>();
+    private HashMap<String, String> userTable;
 
-    public LoginAuthintication(String username, String password) {
+
+    public LoginAuthintication() {
         // Add some example users to the userTable
-        userTable.put("user1", "password1");
-        userTable.put("user2", "password2");
-   
+    	getUserInformation dbUtil = new getUserInformation();
+    	this.userTable = dbUtil.getUserInfo();
+    }
+    
+    public boolean verifications(String username, String password) {
         if(this.hasSQLInjectionRisk(username) && this.hasSQLInjectionRisk(password) ) {
         	if(this.authenticate(username,password)) {
-        		System.out.println("Password Matched !!!");
+        		return true;
         	}else {
-        		System.out.println("Password Not Matched !!!");
+        		JOptionPane.showMessageDialog(null, "Username and Password are not Matched !!!");
+        		return false;
         	}
         }else {
-        	System.out.println("security vulnerability Warning!!");
+        	String iconFileName = "vulnerability.png";
+        	ImageIcon icon = new ImageIcon(getClass().getResource("/" + iconFileName));
+        	Image resizedImage = icon.getImage().getScaledInstance(55, 55, Image.SCALE_SMOOTH);
+        	ImageIcon warningIcon = new ImageIcon(resizedImage);
+        	
+        	JOptionPane.showMessageDialog(null, "Security vulnerability Warning!!","Warning",JOptionPane.WARNING_MESSAGE, warningIcon);
+        	return false;
         }
     }
 

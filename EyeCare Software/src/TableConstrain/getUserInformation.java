@@ -54,8 +54,36 @@ public class getUserInformation {
                 System.out.println(ex.getMessage());
             }
         }
-       
     	return userTable;
+    }
+    
+    public String getUserId(String username) {
+    	String user_id = null;
+    	String sql = "SELECT user_id FROM userInfo WHERE username = \"" + username + "\";";
+    	 try {
+ 			pstmt = conn.prepareStatement(sql);
+ 			rs = pstmt.executeQuery();
+ 			while (rs.next()) {
+ 		        user_id = rs.getString("user_id");
+ 			}
+ 		 } catch (SQLException e) {
+ 			e.printStackTrace();
+ 		 } finally {
+             try {
+                 if (rs != null) {
+                     rs.close();
+                 }
+                 if (pstmt != null) {
+                     pstmt.close();
+                 }
+                 if (conn != null) {
+                     conn.close();
+                 }
+             } catch (SQLException ex) {
+                 System.out.println(ex.getMessage());
+             }
+         }
+    	 return user_id;
     }
     
 }

@@ -26,6 +26,7 @@ public class LoginPannel extends JFrame {
         setTitle("Login Screen");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 300);
+        setLocationRelativeTo(null);
         
         JPanel panel = new JPanel();
         panel.setForeground(new Color(0, 255, 255));

@@ -11,7 +11,9 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 import LoginManager.LoginChunk;
+import LoginManager.LoginPannel;
 import TableConstrain.*;
+import UsersUtilitiesManager.UsersUtilities;
 
 class NavBarHandler {
 	PrintPreview printPreview;
@@ -79,7 +81,9 @@ class NavBarHandler {
     }
 	
 	public void onSleepModeMenuItemClick(ActionEvent e) {
-		JOptionPane.showMessageDialog(null, "On sleep mode is under process");
+		LoginChunk.frame.dispose();
+		LoginPannel loginPanel = new LoginPannel();
+        loginPanel.setVisible(true);
     }
 	
     public void onPrintPreviewtMenuItemClick(ActionEvent e) {
@@ -109,7 +113,8 @@ class NavBarHandler {
     }
 
     public void onChangePassMenuItemClick(ActionEvent e) {
-        JOptionPane.showMessageDialog(null, "Change Password is under process");
+//    	UsersUtilities uu = new UsersUtilities();
+//    	uu.setVisible(true);
     }
     
 	public void onUserAccessMenuItemClick(ActionEvent e) {

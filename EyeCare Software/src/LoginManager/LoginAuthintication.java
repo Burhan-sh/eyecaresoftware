@@ -7,13 +7,9 @@ import javax.swing.JOptionPane;
 import TableConstrain.getUserInformation;
 
 public class LoginAuthintication {
-    private static final String DEFAULT_USERNAME = "master_admin";
-    private static final String DEFAULT_PASSWORD = "super@eyecare";
     private HashMap<String, String> userTable;
 
-
     public LoginAuthintication() {
-        // Add some example users to the userTable
     	getUserInformation dbUtil = new getUserInformation();
     	this.userTable = dbUtil.getUserInfo();
     }
@@ -21,6 +17,9 @@ public class LoginAuthintication {
     public boolean verifications(String username, String password) {
         if(this.hasSQLInjectionRisk(username) && this.hasSQLInjectionRisk(password) ) {
         	if(this.authenticate(username,password)) {
+        		getUserInformation ui = new getUserInformation();
+        		String user_id = ui.getUserId(username);
+        		LoginSessions.setUserId(user_id);
         		return true;
         	}else {
         		JOptionPane.showMessageDialog(null, "Username and Password are not Matched !!!");
@@ -38,9 +37,6 @@ public class LoginAuthintication {
     }
 
     public boolean authenticate(String username, String password) {
-        if (DEFAULT_USERNAME.equals(username) && DEFAULT_PASSWORD.equals(password)) {
-            return true;
-        }
         String storedPassword = userTable.get(username);
         return storedPassword != null && storedPassword.equals(password);
     }

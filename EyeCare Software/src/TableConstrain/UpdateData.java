@@ -30,7 +30,7 @@ public class UpdateData {
         if (confirmation == JOptionPane.YES_OPTION) {
 	        try {
 	        	
-	            String url = "jdbc:sqlite:EyeCare.db";
+	            String url = "jdbc:sqlite:sysconfig/EyeCare.db";
 	            conn = DriverManager.getConnection(url);
 	            
 	            String sql = "UPDATE CustomerInfo SET Name = ?, ExaminedBy = ?, Address = ?, BirthDate = ?, ContectNo = ?, Gender = ?, Age = ? WHERE id = ?";

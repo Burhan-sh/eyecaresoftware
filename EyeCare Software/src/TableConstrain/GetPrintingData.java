@@ -13,7 +13,7 @@ public class GetPrintingData {
     PreparedStatement pstmt = null;
     
     public GetPrintingData() {
-    	String url = "jdbc:sqlite:EyeCare.db";
+    	String url = "jdbc:sqlite:sysconfig/EyeCare.db";
         try {
 			this.conn = DriverManager.getConnection(url);
 		} catch (SQLException e) {

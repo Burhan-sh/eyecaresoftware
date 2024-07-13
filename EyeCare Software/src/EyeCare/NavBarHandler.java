@@ -113,8 +113,8 @@ class NavBarHandler {
     }
 
     public void onChangePassMenuItemClick(ActionEvent e) {
-//    	UsersUtilities uu = new UsersUtilities();
-//    	uu.setVisible(true);
+    	UsersUtilities uu = new UsersUtilities();
+    	uu.setVisible(true);
     }
     
 	public void onUserAccessMenuItemClick(ActionEvent e) {

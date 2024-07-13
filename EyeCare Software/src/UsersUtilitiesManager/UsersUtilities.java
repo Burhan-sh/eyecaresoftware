@@ -1,6 +1,7 @@
 package UsersUtilitiesManager;
 
 import TableConstrain.GetUserUtilityData;
+import TableConstrain.getUserInformation;
 import LoginManager.EncriptAbsration;
 import javax.swing.JFrame;
 import javax.swing.JComboBox;
@@ -10,9 +11,10 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
-@SuppressWarnings("serial")
 public class UsersUtilities extends JFrame{
+	private static final long serialVersionUID = -4507973933625795364L;
 	private JTextField old_pass;
 	private JTextField new_pass;
 	private JTextField confrim_pass;
@@ -32,9 +34,6 @@ public class UsersUtilities extends JFrame{
 		EncriptAbsration en = new EncriptAbsration();
 	    for (ContainerObject obj : objList) {
 	    	comboBox.addItem(obj.username);
-//	    	System.out.println(obj.user_id);
-//	    	System.out.println(obj.username);
-//	    	System.out.println(en.setDecryption(obj.password));
 	    }
 		
 		comboBox.setBounds(219, 41, 184, 22);
@@ -60,15 +59,47 @@ public class UsersUtilities extends JFrame{
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!old_pass.getText().isEmpty() && !new_pass.getText().isEmpty() && !confrim_pass.getText().isEmpty()) {
-					System.out.println(old_pass.getText());
-					System.out.println(new_pass.getText());
-					System.out.println(confrim_pass.getText());
+					String selectedUser = (String) comboBox.getSelectedItem();
+					String existingPass = null;
+					String user_id = null;
+					for (ContainerObject obj : objList) {
+				    	if(selectedUser.equals(obj.username)) {
+				    		existingPass = en.setDecryption(obj.password);
+				    		user_id = obj.user_id;
+				    	}
+				    }					
+					PasswordValidation pw = new PasswordValidation();
+					boolean validation = pw.matchPassword(new_pass.getText(),confrim_pass.getText());
+					if(validation) {
+						boolean checkOldPass = pw.matchPassword(old_pass.getText(),existingPass);
+						if(checkOldPass) {
+							getUserInformation gui = new getUserInformation();
+							Boolean sucess = gui.updatePassword(user_id, en.setEncryption(new_pass.getText()));
+							if(sucess) {
+								UsersUtilities.this.dispose();
+								JOptionPane.showMessageDialog(UsersUtilities.this,"Password Updated","Password Updated !!!",JOptionPane.INFORMATION_MESSAGE);
+							}else{
+								JOptionPane.showMessageDialog(UsersUtilities.this,"Password Not Updated","Error",JOptionPane.ERROR_MESSAGE);
+							}
+						}else {
+							JOptionPane.showMessageDialog(UsersUtilities.this,"Please Provide correct password","Error",JOptionPane.ERROR_MESSAGE);
+						}
+					}else {
+				         JOptionPane.showMessageDialog(UsersUtilities.this,"New Password and confirm password should be match!!!","Error",JOptionPane.ERROR_MESSAGE);
+				    }
+				}else {
+					JOptionPane.showMessageDialog(UsersUtilities.this,"Please Enter password","Error",JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
 		getContentPane().add(btnNewButton);
 		
 		btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UsersUtilities.this.dispose();
+			}
+		});
 		btnCancel.setBounds(230, 183, 148, 23);
 		getContentPane().add(btnCancel);
 		

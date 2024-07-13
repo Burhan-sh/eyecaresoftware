@@ -12,7 +12,7 @@ import java.io.File;
 public class DataManager {
 	
     private static final String DB_URL_PREFIX = "jdbc:sqlite:";
-    private static final String DB_FILENAME = "EyeCare.db";
+    private static final String DB_FILENAME = "sysconfig/EyeCare.db";
     
 	public DataManager() throws SQLException {
 		DataManager.getConnection();

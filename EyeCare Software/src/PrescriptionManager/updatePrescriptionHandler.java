@@ -55,7 +55,7 @@ public class updatePrescriptionHandler implements ActionListener  {
         if (confirmation == JOptionPane.YES_OPTION) {
 	        try {
 	        	
-	            String url = "jdbc:sqlite:EyeCare.db";
+	            String url = "jdbc:sqlite:sysconfig/EyeCare.db";
 	            conn = DriverManager.getConnection(url);
 	            
 	            String sql = "UPDATE PrescritionDetails SET sphOD = ?, cylOD = ?, axisOD = ?, vdOD = ?, nearOD = ?, vnOD = ?, sphOS = ?"

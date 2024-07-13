@@ -27,7 +27,7 @@ public class GetCustmerData{
         model.addColumn("Age");
     	
         try {
-            String url = "jdbc:sqlite:EyeCare.db";
+            String url = "jdbc:sqlite:sysconfig/EyeCare.db";
             conn = DriverManager.getConnection(url);
 
             Statement stmt = conn.createStatement();
@@ -44,6 +44,30 @@ public class GetCustmerData{
             e.printStackTrace();
         }
     	return model;
+    }
+    
+    public int getCustomerCount() {
+        int count = 0;
+        
+        try {
+            String url = "jdbc:sqlite:sysconfig/EyeCare.db";
+            Connection conn = DriverManager.getConnection(url);
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM CustomerInfo");
+            
+            if (rs.next()) {
+                count = rs.getInt(1);  // Get the first (and only) column value (count)
+            }
+             
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return count;
     }
 
 }

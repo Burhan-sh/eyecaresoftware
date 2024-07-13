@@ -2,9 +2,7 @@ package LoginManager;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
-import EyeCare.SingleInstanceChecker;
 import EyeCare.main;
-import TableConstrain.DataManager;
 
 public class LoginChunk {
 	public static main frame;

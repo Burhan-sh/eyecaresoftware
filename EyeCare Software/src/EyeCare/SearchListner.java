@@ -45,7 +45,7 @@ public class SearchListner implements DocumentListener {
 	public void searchOpration(String searchBy , String searchData ) {
 		if( searchBy != "Search By" ) {			
 			try {
-				String url = "jdbc:sqlite:EyeCare.db";
+				String url = "jdbc:sqlite:sysconfig/EyeCare.db";
 				conn = DriverManager.getConnection(url);
 				String query = "SELECT * FROM CustomerInfo WHERE " + searchBy + " LIKE '%" + searchData + "%'";
 				

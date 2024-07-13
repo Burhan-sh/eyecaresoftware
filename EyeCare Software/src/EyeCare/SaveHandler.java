@@ -136,7 +136,7 @@ public class SaveHandler implements ActionListener {
         
         try {
         	
-        	String url = "jdbc:sqlite:EyeCare.db";
+        	String url = "jdbc:sqlite:sysconfig/EyeCare.db";
             conn = DriverManager.getConnection(url);
 
             pstmt = conn.prepareStatement(sql);

@@ -15,13 +15,15 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import LoginManager.LoginChunk;
+import LoginManager.LoginPannel;
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.model.ZipParameters;
 import net.lingala.zip4j.model.enums.CompressionLevel;
 import net.lingala.zip4j.model.enums.EncryptionMethod;
 
 public class ExportProcess {
-	private static final String DB_FILE_NAME = "EyeCare.db";
+	private static final String DB_FILE_NAME = "sysconfig/EyeCare.db";
 		
     private void createBackupFile(String dbFileName, String backupFilePath) throws IOException {
         // Create a temporary backup file
@@ -50,8 +52,10 @@ public class ExportProcess {
         	@SuppressWarnings("resource")
 			ZipFile zipFile = new ZipFile(backupFilePath , "01-06-1991".toCharArray());
             zipFile.addFile(tempBackupFile, zipParameters);
-
 //            JOptionPane.showMessageDialog(null, "Backup File Exported to: " + backupFilePath);
+	        LoginChunk.frame.dispose();
+	        LoginPannel loginPanel = new LoginPannel();
+	        loginPanel.setVisible(true);
         } catch (Exception ex) {
 //            JOptionPane.showMessageDialog(null, "Backup File Error exporting : " + ex.getMessage(), "Export Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -63,7 +67,7 @@ public class ExportProcess {
     
     public void deleteEyeCareDBFile() {
     	
-    	String filePath = "EyeCare.db"; // Path to the EyeCare.db file
+    	String filePath = "sysconfig/EyeCare.db"; // Path to the EyeCare.db file
     	   // Establish the database connection
         Connection connection;
 		try {
@@ -81,9 +85,9 @@ public class ExportProcess {
             Thread.sleep(1000); // Adjust the delay duration if needed
             
             Files.delete(fileToDelete);
-            JOptionPane.showMessageDialog(null, "EyeCare.db file deleted successfully!");
+            JOptionPane.showMessageDialog(null, "Database file deleted successfully!");
         } catch (IOException | InterruptedException e) {
-            JOptionPane.showMessageDialog(null, "Failed to delete EyeCare.db file.");
+            JOptionPane.showMessageDialog(null, "Failed to delete Database file.");
             e.printStackTrace();
         }
     }

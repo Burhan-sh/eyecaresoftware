@@ -29,7 +29,7 @@ public class InsertData {
         
         try {
         	
-            String url = "jdbc:sqlite:EyeCare.db";
+            String url = "jdbc:sqlite:sysconfig/EyeCare.db";
             conn = DriverManager.getConnection(url);
 
             String sql = "INSERT INTO CustomerInfo (Name,ExaminedBy,Address,BirthDate,ContectNo,Gender,Age) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -109,7 +109,7 @@ public class InsertData {
 	        
         try {
         	
-            String url = "jdbc:sqlite:EyeCare.db";
+            String url = "jdbc:sqlite:sysconfig/EyeCare.db";
             conn = DriverManager.getConnection(url);
 
             String sql = "INSERT INTO PrescritionDetails (sphOD,cylOD,axisOD,vdOD,nearOD,vnOD,sphOS,cylOS,axisOS,vdOS,nearOS,vnOS,LensType,LensFor,LensSide,LensPrice,FrameType,FramePrice,PaidAmount,ExtraCharges,Remark,TotalAmount,CustomerId,OrderDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

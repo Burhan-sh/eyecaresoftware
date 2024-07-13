@@ -101,6 +101,7 @@ public class main extends JFrame {
 	 * Create the frame.
 	 */
 	public main() {
+		setTitle("Eye Care Application -- Demo Version");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(75, 75, 1201, 755);

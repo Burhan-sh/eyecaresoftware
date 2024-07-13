@@ -38,7 +38,7 @@ public class DeleteData  implements ActionListener {
 	    PreparedStatement pstmt = null;
 	    
 	    try {	
-			String url = "jdbc:sqlite:EyeCare.db";
+			String url = "jdbc:sqlite:sysconfig/EyeCare.db";
 			conn = DriverManager.getConnection(url);
 			
 			String sql = "DELETE FROM CustomerInfo WHERE id = ?";

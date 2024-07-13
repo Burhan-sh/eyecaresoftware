@@ -39,7 +39,7 @@ public class deletePrescriptionHandler implements ActionListener {
 	
 	private void deleteData( int prescriptionDataID ) {
 	    PreparedStatement pstmt = null;
-		String url = "jdbc:sqlite:EyeCare.db";
+		String url = "jdbc:sqlite:sysconfig/EyeCare.db";
 		Connection conn;
 		try {
 			conn = DriverManager.getConnection(url);

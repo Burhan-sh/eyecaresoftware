@@ -11,6 +11,8 @@ import java.util.zip.ZipException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+import LoginManager.LoginChunk;
+import LoginManager.LoginPannel;
 import net.lingala.zip4j.ZipFile;
 
 public class ImportProcess {
@@ -92,7 +94,7 @@ public class ImportProcess {
 	        }
 	        
 	        FileInputStream input = new FileInputStream(selectedFile);
-	        FileOutputStream output = new FileOutputStream("EyeCare.db");
+	        FileOutputStream output = new FileOutputStream("sysconfig/EyeCare.db");
 	
 	        byte[] buffer = new byte[1024];
 	        int bytesRead;
@@ -109,13 +111,16 @@ public class ImportProcess {
 	            deleteFolder(listImportsFolder);
 	        }
 	        JOptionPane.showMessageDialog(null, "File imported successfully!", "Import Backup File", JOptionPane.INFORMATION_MESSAGE);
+	        LoginChunk.frame.dispose();
+	        LoginPannel loginPanel = new LoginPannel();
+	        loginPanel.setVisible(true);
 	    } catch (IOException e1) {
 	    	JOptionPane.showMessageDialog(null, "Error importing file: " + e1.getMessage(), "Import Error", JOptionPane.ERROR_MESSAGE);
 	    }
 	}
 	
 	private void existingDbDeleted() {
-	    File dbFile = new File("EyeCare.db");
+	    File dbFile = new File("sysconfig/EyeCare.db");
 	    if (dbFile.exists()) {
 	        dbFile.delete();
 	    }

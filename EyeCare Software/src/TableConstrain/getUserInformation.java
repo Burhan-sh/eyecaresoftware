@@ -14,7 +14,7 @@ public class getUserInformation {
     PreparedStatement pstmt = null;
     
     public getUserInformation() {
-    	String url = "jdbc:sqlite:EyeCare.db";
+    	String url = "jdbc:sqlite:sysconfig/EyeCare.db";
         try {
 			this.conn = DriverManager.getConnection(url);
 		} catch (SQLException e) {
@@ -37,7 +37,6 @@ public class getUserInformation {
 		        userTable.put(username, depassword);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
             try {
@@ -85,5 +84,34 @@ public class getUserInformation {
          }
     	 return user_id;
     }
-    
+
+    public Boolean updatePassword(String userid, String password) {
+    	
+    	String updateSql = "UPDATE userInfo SET password = ? WHERE user_id = ?";
+    	PreparedStatement updateStmt = null;
+    	Boolean sucess = null;
+    	try {
+    	    updateStmt = conn.prepareStatement(updateSql);
+    	    updateStmt.setString(1, password);
+    	    updateStmt.setString(2, userid);
+
+    	    int rowsAffected = updateStmt.executeUpdate();
+    	    if (rowsAffected > 0) {
+    	        sucess = true;
+    	    } else {
+    	        sucess = false;
+    	    }
+    	} catch (SQLException e) {
+    	    e.printStackTrace();
+    	} finally {
+    	    if (updateStmt != null) {
+    	        try {
+    	            updateStmt.close();
+    	        } catch (SQLException e) {
+    	            e.printStackTrace();
+    	        }
+    	    }
+    	}
+		return sucess;
+    }
 }

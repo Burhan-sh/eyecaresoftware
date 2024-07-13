@@ -17,7 +17,7 @@ public class GetUserUtilityData {
     PreparedStatement pstmt = null;
     
 	public GetUserUtilityData() {
-    	String url = "jdbc:sqlite:EyeCare.db";
+    	String url = "jdbc:sqlite:sysconfig/EyeCare.db";
         try {
 			this.conn = DriverManager.getConnection(url);
 		} catch (SQLException e) {
@@ -29,7 +29,7 @@ public class GetUserUtilityData {
 		ResultSet rs = null;
 		List<ContainerObject> objList = new ArrayList<>();
 		
-        String sql = "SELECT user_id, username, password FROM userInfo WHERE is_active = 1";
+        String sql = "SELECT user_id, username, password FROM userInfo WHERE is_active = 1 AND user_role <> 'super_admin'";
         
         try {
 			pstmt = conn.prepareStatement(sql);
